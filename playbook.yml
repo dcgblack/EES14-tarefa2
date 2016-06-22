@@ -1,0 +1,22 @@
+---
+- hosts: all
+  vars:
+  remote_user: vagrant
+  tasks:
+  - name: Copy RVM
+    copy: src=rvm-stable.tar.gz dest=/home/vagrant
+  - name: Prepare RVM setup
+    file: state=directory dest=/home/vagrant/rvm
+  - name: Unpack RVM
+    shell: "tar --strip-components=1 -xzf ../rvm-stable.tar.gz"
+    args:
+      chdir: /home/vagrant/rvm
+  - name: Install RVM
+    shell: "./install --auto-dotfiles"
+    args:
+      chdir: /home/vagrant/rvm
+  - name: Install nodejs
+    apt: name=nodejs state=present update_cache=yes
+    sudo: yes
+  - name: Install Ruby and Rails
+    script: install-ruby.sh
