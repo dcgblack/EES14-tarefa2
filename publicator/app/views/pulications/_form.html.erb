@@ -1,0 +1,41 @@
+<%= form_for(@pulication) do |f| %>
+  <% if @pulication.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pulication.errors.count, "error") %> prohibited this pulication from being saved:</h2>
+
+      <ul>
+      <% @pulication.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :nature %><br>
+    <%= f.text_field :nature %>
+  </div>
+  <div class="field">
+    <%= f.label :reach %><br>
+    <%= f.text_field :reach %>
+  </div>
+  <div class="field">
+    <%= f.label :authors %><br>
+    <%= f.text_field :authors %>
+  </div>
+  <div class="field">
+    <%= f.label :organizer %><br>
+    <%= f.text_field :organizer %>
+  </div>
+  <div class="field">
+    <%= f.label :vehicle %><br>
+    <%= f.text_field :vehicle %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

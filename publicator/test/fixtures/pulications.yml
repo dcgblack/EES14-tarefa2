@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  nature: MyString
+  reach: MyString
+  authors: 
+  organizer: MyString
+  vehicle: MyString
+
+two:
+  type: 
+  nature: MyString
+  reach: MyString
+  authors: 
+  organizer: MyString
+  vehicle: MyString
