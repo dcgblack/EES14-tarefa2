@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %> </p>
+
+<h2>Name: <%= @user.name %> </h2>
+
+<ul>
+  <li>E-mail: <%= @user.email %> </li>
+  <li>Lates: <%= @user.lates %> </li>
+</ul>
+
+<%= link_to 'Editar Perfil', edit_user_path(@user) %>
