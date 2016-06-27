@@ -21,3 +21,12 @@
 
 en:
   hello: "Hello world"
+
+  activemodel:
+    attributes:
+      user_session:
+        email: Email
+        password: Senha
+    errors:
+      messages:
+        invalid_login: 'Usuário ou senha inválidos'
