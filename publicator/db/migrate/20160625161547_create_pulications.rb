@@ -1,7 +1,7 @@
 class CreatePulications < ActiveRecord::Migration
   def change
     create_table :pulications do |t|
-      t.string :type
+      t.string :public_type
       t.string :nature
       t.string :reach
       t.string :authors
