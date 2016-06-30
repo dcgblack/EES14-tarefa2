@@ -1,0 +1,1 @@
+json.extract! @publication, :id, :type, :title, :subtitle, :edition, :local, :publishing_company, :year_of_publication, :description, :other, :category, :volume, :publication_number, :initial_final_page, :section, :created_at, :updated_at

@@ -11,27 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628004141) do
+ActiveRecord::Schema.define(version: 20160630205329) do
 
-  create_table "pulications", force: :cascade do |t|
-    t.string   "type"
-    t.string   "nature"
-    t.string   "reach"
-    t.string   "authors"
-    t.string   "organizer"
-    t.string   "vehicle"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "publications", force: :cascade do |t|
+    t.string   "title"
+    t.string   "subtitle"
+    t.string   "edition"
+    t.string   "local"
+    t.string   "publishing_company"
+    t.date     "year_of_publication"
+    t.string   "description"
+    t.string   "other"
+    t.string   "category"
+    t.string   "volume"
+    t.string   "publication_number"
+    t.string   "initial_final_page"
+    t.string   "section"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "user_id"
   end
 
-  add_index "pulications", ["user_id"], name: "index_pulications_on_user_id"
+  add_index "publications", ["user_id"], name: "index_publications_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password"
-    t.string   "lates"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
