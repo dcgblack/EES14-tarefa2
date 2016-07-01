@@ -1,51 +1,29 @@
-<p id="notice"><%= notice %></p>
+<h1><%= t '.title' %> </h1>
 
-<h1>Listing Publication</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Subtitle</th>
-      <th>Edition</th>
-      <th>Local</th>
-      <th>Publishing company</th>
-      <th>Year of publication</th>
-      <th>Description</th>
-      <th>Other</th>
-      <th>Category</th>
-      <th>Volume</th>
-      <th>Publication number</th>
-      <th>Initial final page</th>
-      <th>Section</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @publications.each do |publication| %>
-      <tr>
-        <td><%= publication.title %></td>
-        <td><%= publication.subtitle %></td>
-        <td><%= publication.edition %></td>
-        <td><%= publication.local %></td>
-        <td><%= publication.publishing_company %></td>
-        <td><%= publication.year_of_publication %></td>
-        <td><%= publication.description %></td>
-        <td><%= publication.other %></td>
-        <td><%= publication.category %></td>
-        <td><%= publication.volume %></td>
-        <td><%= publication.publication_number %></td>
-        <td><%= publication.initial_final_page %></td>
-        <td><%= publication.section %></td>
-        <td><%= link_to 'Show', publication %></td>
-        <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
-        <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<% @publications.each do |publication| %>
+  <article class="publication">
+    <h2><%= link_to publication.title, publication %> </h2>
+    <span class="created">
+      <%= t 'Dono',
+      owner: publication.user.name,
+      when: l(publication.created_at, format: :short) %>
+    </span>
+    <p>
+      <span class="location">
+        <%= link_to publication.local,
+        "https://maps.google.com/?q=#{publication.local}",
+        target: :blank %>
+      </span>
+    </p>
+    <p><%= publication.description %> </p>
+    <% if belongs_to_user(publication) %>
+      <ul>
+        <li><%= link_to t('.edit'), edit_publication_path(publication) %> </li>
+        <li><%= link_to t('.destroy'), publication_path(publication),
+          method: :delete, data:
+          {confirm: t('dialogs.destroy')}
+        %> </li>
+      </ul>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Pulication', new_publication_path %>
+  </article>
+<% end %>

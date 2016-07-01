@@ -11,15 +11,15 @@ class PublicationsController < ApplicationController
   end
 
   def new
-    @publication = Publication.new
+    @publication = current_user.publications.build
   end
 
   def edit
-    @publication = Publication.find(params[:id])
+    @publication = current_user.publications.find(params[:id])
   end
 
   def create
-    @publication = Publication.new(publication_params)
+    @publication = current_user.publications.build(publication_params)
   
     if @publication.save
       redirect_to @publication, notice: "Publicação criada com sucesso"
@@ -29,6 +29,8 @@ class PublicationsController < ApplicationController
   end
 
   def update
+    @publication = current_user.publications.find(params[:id])
+    
     if @publication.update(publication_params)
       redirect_to @publication, notice: "Atualizado com sucesso"
     else
@@ -37,7 +39,7 @@ class PublicationsController < ApplicationController
   end
 
   def destroy
-    @publication = Publication.find(params[:id])
+    @publication = current_user.publications.find(params[:id])
     @publication.destroy
 
     redirect_to publications_url
