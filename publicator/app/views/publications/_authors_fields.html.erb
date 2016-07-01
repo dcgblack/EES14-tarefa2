@@ -1,0 +1,12 @@
+<fieldset>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+  <%= f.label :surname, "Surname" %>
+  <%= f.text_field :name %>
+  <%= f.label :institution, "Institution" %>
+  <%= f.text_field :institution %>
+  <%= f.label :curriculum_lattes, "Curriculum Lattes" %>
+  <%= f.url_field :curriculum_lattes %>
+  <%= f.hidden_field :_destroy %><br>
+  <%= link_to "remove", '#', class: "remove_fields" %>
+</fieldset>

@@ -65,5 +65,13 @@
   <%= @publication.section %>
 </p>
 
+<ul>
+   <strong>Authors:</strong>
+   <% @publication.authors.each do |author| %>
+      <li><%= author.name %></li>
+   <% end %>
+</ul>
+
+
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
 <%= link_to 'Back', publications_path %>

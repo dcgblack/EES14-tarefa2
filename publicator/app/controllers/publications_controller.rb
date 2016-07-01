@@ -10,12 +10,13 @@ class PublicationsController < ApplicationController
     @publication = Publication.find(params[:id])
 
     if user_signed_in?
-      @user_author = @publication.author.find_or_initialize_by(user_id: current_user.id)
+      @user_author = @publication.authors.find_or_initialize_by(user_id: current_user.id)
     end
   end
 
   def new
     @publication = current_user.publications.build
+    @publication.authors.build
   end
 
   def edit
@@ -58,6 +59,7 @@ class PublicationsController < ApplicationController
   def publication_params
     params.require(:publication).permit(:title, :subtitle, :edition, :local,
       :publishing_company, :year_of_publication, :description, :other,
-        :category, :volume, :publication_number, :initial_final_page, :section)
+        :category, :volume, :publication_number, :initial_final_page, :section, 
+        authors_attributes: [:id, :name])
   end
 end

@@ -33,7 +33,7 @@
   </div>
   <div class="field">
     <%= f.label :year_of_publication %><br>
-    <%= f.date_select :year_of_publication %>
+    <%= f.text_field :year_of_publication %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
@@ -63,7 +63,14 @@
     <%= f.label :section %><br>
     <%= f.text_field :section %>
   </div>
-  <div class="actions">
+
+  <h2>Authors</h2>
+  <%= f.fields_for :authors do |author| %>
+    <%= render 'authors_fields', f: author %>
+  <% end %>
+  <%= link_to_add_fields "Add Author", f, :authors %>
+
+<div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
