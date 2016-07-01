@@ -25,7 +25,7 @@ class PublicationsController < ApplicationController
 
   def create
     @publication = current_user.publications.build(publication_params)
-  
+
     if @publication.save
       redirect_to @publication, notice: "Publicação criada com sucesso"
     else
@@ -35,7 +35,7 @@ class PublicationsController < ApplicationController
 
   def update
     @publication = current_user.publications.find(params[:id])
-    
+
     if @publication.update(publication_params)
       redirect_to @publication, notice: "Atualizado com sucesso"
     else
@@ -51,7 +51,7 @@ class PublicationsController < ApplicationController
   end
 
   private
-  
+
   def set_publication
     @publication = Publication.find(params[:id])
   end
