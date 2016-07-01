@@ -7,7 +7,7 @@ class PublicationsController < ApplicationController
   end
 
   def show
-    @publications = Publication.find(params[:id])
+    @publication = Publication.find(params[:id])
   end
 
   def new
@@ -15,26 +15,24 @@ class PublicationsController < ApplicationController
   end
 
   def edit
-    @publications = Publication.find(params[:id])
+    @publication = Publication.find(params[:id])
   end
 
   def create
-    @publication = Publication.new(params[:room])
+    @publication = Publication.new(publication_params)
   
     if @publication.save
-      redirect_to @publication, notice: t('flash.notice.room_created')
+      redirect_to @publication, notice: "Publicação criada com sucesso"
     else
-      render action: "new"
+      render :new
    end
   end
 
   def update
-    @publication = Publication.find(params[:id])
-
-    if @publication.update(params[:room])
-      redirect_to @publication, notice: t('flash.notice.room_updated')
+    if @publication.update(publication_params)
+      redirect_to @publication, notice: "Atualizado com sucesso"
     else
-      render action: "edit"
+      render :edit
     end
   end
 
@@ -42,7 +40,7 @@ class PublicationsController < ApplicationController
     @publication = Publication.find(params[:id])
     @publication.destroy
 
-    redirect_to rooms_url
+    redirect_to publications_url
   end
 
   private
