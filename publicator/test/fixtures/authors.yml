@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  publication_id: 
+  name: MyString
+  curriculum_lattes: MyString
+  institution: MyString
+
+two:
+  user_id: 
+  publication_id: 
+  name: MyString
+  curriculum_lattes: MyString
+  institution: MyString
