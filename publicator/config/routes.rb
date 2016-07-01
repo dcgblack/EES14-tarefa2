@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :publications
+  resources :publications do 
+    resources :authors, only: [:create, :update], module: :publications
+  end
   resources :users
 
   resource :confirmation, only: [:show]

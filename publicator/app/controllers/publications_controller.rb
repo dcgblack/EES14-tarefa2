@@ -8,6 +8,10 @@ class PublicationsController < ApplicationController
 
   def show
     @publication = Publication.find(params[:id])
+
+    if user_signed_in?
+      @user_author = @publication.author.find_or_initialize_by(user_id: current_user.id)
+    end
   end
 
   def new
