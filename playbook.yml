@@ -5,18 +5,41 @@
   tasks:
   - name: Copy RVM
     copy: src=rvm-stable.tar.gz dest=/home/vagrant
+
   - name: Prepare RVM setup
     file: state=directory dest=/home/vagrant/rvm
+
   - name: Unpack RVM
     shell: "tar --strip-components=1 -xzf ../rvm-stable.tar.gz"
     args:
       chdir: /home/vagrant/rvm
+
   - name: Install RVM
     shell: "./install --auto-dotfiles"
     args:
       chdir: /home/vagrant/rvm
+
   - name: Install nodejs
     apt: name=nodejs state=present update_cache=yes
     sudo: yes
+  
+  - name: Copy Ruby
+    copy: src=ruby-2.3.0.tar.bz2 dest=/home/vagrant/.rvm/archives
+
   - name: Install Ruby and Rails
     script: install-ruby.sh
+
+  - name: Install gems
+    bundler: state=present chdir=/vagrant/publicator executable=/home/vagrant/.rvm/gems/ruby-2.3.0/wrappers/bundle
+
+  - name: DB Migrate
+    shell: "/home/vagrant/.rvm/gems/ruby-2.3.0/wrappers/rake db:migrate"
+    args:
+      chdir: /vagrant/publicator
+
+  - name: Start app
+    shell: "/home/vagrant/.rvm/gems/ruby-2.3.0/wrappers/rails server -b 0.0.0.0"
+    args:
+      chdir: /vagrant/publicator
+  
+    
