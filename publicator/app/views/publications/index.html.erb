@@ -1,49 +1,15 @@
 <h1>Publications</h1>
-
-<%#FURASTÉ, Pedro Augusto. Normas Técnicas para o Trabalho Científico:
-explicitação das normas da ABNT. Porto Alegre: [s.n.], 2002. p. 49-56.
-%>
-
-<% Publication::CATEGORIES.each do |category| %>
+<% Publication::CATEGORIES.each_pair do |label, name| %>
   <br/><br/>
-  <h2><%= category %></h2>
+  <h2><%= name %></h2>
   <br/>
   <% @publications.each do |publication| %>
-    <% if publication.category == category %>
-      <% if category == "Monografias e livros" %>
-        <article class="publication">
-          <%= publication.other %>. <%= publication.title.strip %><% unless publication.subtitle.empty? %>:
-          <%= publication.subtitle %><% end %>. <% unless publication.edition.empty? %><%= publication.edition %> ed.
-          <% end %><% unless publication.local.empty? %><%= publication.local %>:
-          <% end %><% unless publication.publishing_company.empty? %><%= publication.publishing_company %>,
-          <% end %><% unless publication.volume.empty? %>v. <%= publication.volume %>,<% end %>
-          <% unless publication.publication_number.empty? %>n. <%= publication.publication_number %>,<% end %>
-          <%= publication.year_of_publication %>. <% unless publication.initial_final_page.empty? %>p.
-          <%= publication.initial_final_page %>.<% end %>
-        </article>
-      <% elsif category == "Artigos" %>
-        <article class="publication">
-          <%= publication.other %>. <%= publication.title.strip %><% unless publication.subtitle.empty? %>:
-          <%= publication.subtitle %><% end %>.<% unless publication.publishing_company.empty? %>
-          <b><%= publication.publishing_company %></b>.<% end %><% unless publication.local.empty? %>
-          <%= publication.local %>,<% end %> <% unless publication.volume.empty? %>v. <%= publication.volume %>,<% end %>
-          <% unless publication.publication_number.empty? %>n. <%= publication.publication_number %>,<% end %>
-          <% unless publication.initial_final_page.empty? %>p. <%= publication.initial_final_page %>,<% end %>
-          <%= publication.year_of_publication %>.
-        </article>
-      <% else %>
-        <article class="publication">
-          <%= publication.other %>. <%= publication.title.strip %><% unless publication.subtitle.empty? %>:
-          <%= publication.subtitle %><% end %>. <% unless publication.edition.empty? %>Edition <%= publication.edition %>.
-          <% end %><% unless publication.local.empty? %><%= publication.local %>:
-          <% end %><% unless publication.publishing_company.empty? %><%= publication.publishing_company %>,
-          <% end %><% unless publication.volume.empty? %>v.<%= publication.volume %>,<% end %>
-          <% unless publication.publication_number.empty? %>n.<%= publication.publication_number %>,<% end %>
-          <% unless publication.initial_final_page.empty? %>p.<%= publication.initial_final_page %>.<% end %>
-          <%= publication.year_of_publication %>.
-        </article>
-      <% end %>
-      <br/>
+    <% if publication.category == name %>
+      <article class="publication">
+        <p>
+          <%= publication.__send__("#{label}_to_ref".to_sym) %>
+        </p>
+      </article>
     <% end %>
   <% end %>
 <% end %>
