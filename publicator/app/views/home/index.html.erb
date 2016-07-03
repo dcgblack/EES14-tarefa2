@@ -1,7 +1,6 @@
 <h1>Latest publications</h1>
 <ul>
   <% @publication.each do |pub| %>
-    <li><%= link_to pub.publication_name, pub %> </li>
+    <li><%= link_to pub.title, pub %> </li>
   <% end %>
 </ul>
-
