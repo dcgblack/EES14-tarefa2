@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160701212037) do
+ActiveRecord::Schema.define(version: 20160702212037) do
 
   create_table "authors", force: :cascade do |t|
     t.integer  "user_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160701212037) do
     t.string   "edition"
     t.string   "local"
     t.string   "publishing_company"
-    t.date     "year_of_publication"
+    t.string   "year_of_publication"
     t.string   "description"
     t.string   "other"
     t.string   "category"
