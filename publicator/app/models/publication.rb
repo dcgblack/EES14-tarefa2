@@ -16,19 +16,23 @@ class Publication < ActiveRecord::Base
     "#{title}, #{local}"
   end
 
-  def A_to_ref
-  end
-  def C_to_ref
-  end
-  def D_to_ref
-  end
-  def E_to_ref
-  end
-  def F_to_ref
+  def A_to_ref # Artigos
+    str  = "#{authors_ref} #{title}"
+    str += ": #{subtitle}" unless subtitle.empty?
+    str += ". "
+    str += "#{publishing_company}. " unless publishing_company.empty?
+    str += "#{local}, "
+    str += "v. #{volume}, " unless volume.empty?
+    str += "n. #{publication_number}, " unless publication_number.empty?
+    str += "p. #{initial_final_page} " unless initial_final_page.empty?
+    str += "#{year_of_publication}"
+    str += "."
+
+    str
   end
 
-  def B_to_ref
-    str  = "#{other}. #{title}"
+  def B_to_ref # Monografias e livros
+    str  = "#{authors_ref} #{title}"
     str += ": #{subtitle}" unless subtitle.empty?
     str += ". "
     str += "#{edition} ed. " unless edition.empty?
@@ -37,9 +41,68 @@ class Publication < ActiveRecord::Base
     str += "v. #{volume}, " unless volume.empty?
     str += "n. #{publication_number}, " unless publication_number.empty?
     str += "#{year_of_publication}"
-    str += "p. #{initial_final_page}" unless initial_final_page.empty?
+    str += ". p. #{initial_final_page}" unless initial_final_page.empty?
     str += "."
 
     str
+  end
+
+  def C_to_ref # Dissertações e teses
+    str  = "#{authors_ref} #{title}"
+    str += ": #{subtitle}" unless subtitle.empty?
+    str += ". #{year_of_publication}. "
+    str += "#{description}. " unless description.empty?
+    str += "#{publishing_company}. " unless publishing_company.empty?
+    str += "#{local}. "
+    str += "p. #{initial_final_page}." unless initial_final_page.empty?
+
+    str
+  end
+
+  def D_to_ref # Meios eletrônicos
+    str  = "#{authors_ref} #{title}"
+    str += ": #{subtitle}" unless subtitle.empty?
+    str += ". "
+    str += "Disponível em: <#{local}>. "
+    str += "Acesso em: #{year_of_publication}. "
+    str += "p. #{initial_final_page}." unless initial_final_page.empty?
+
+    str
+  end
+
+  def E_to_ref # RFCs
+    str  = "#{authors_ref} #{title}"
+    str += ": #{subtitle}" unless subtitle.empty?
+    str += ". "
+    str += "#{description}. " unless description.empty?
+    str += "#{local}, "
+    str += "#{publishing_company}, " unless publishing_company.empty?
+    str += "#{year_of_publication}. "
+    str += "p. #{initial_final_page}." unless initial_final_page.empty
+
+    str
+  end
+
+  def F_to_ref # Normas
+    str  = "#{authors_ref.upcase} #{title}"
+    str += ": #{subtitle}" unless subtitle.empty?
+    str += ". "
+    str += "#{description}. " unless description.empty?
+    str += "#{local}: "
+    str += "#{year_of_publication}."
+
+    str
+  end
+
+  private
+
+  def authors_ref
+    authors_str = ""
+    authors.each do |author|
+      authors_str += "#{author.surname.to_s.upcase}, " if not author.surname.nil? or author.surname.to_s.empty?
+      authors_str += "#{author.name}. "
+    end
+
+    authors_str
   end
 end
