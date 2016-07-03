@@ -12,6 +12,15 @@ class Publication < ActiveRecord::Base
                 "F" => "Normas"
               }
 
+  def self.get_years
+    select("year_of_publication").map{|pub| pub.year_of_publication}.uniq
+  end
+
+  def self.get_publications_by_category_and_year(category, year)
+    where("category = :cat AND year_of_publication = :year",
+          {cat: category, year: year})
+  end
+
   def publication_name
     "#{title}, #{local}"
   end
