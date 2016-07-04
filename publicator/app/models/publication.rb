@@ -33,7 +33,7 @@ class Publication < ActiveRecord::Base
     str += "#{local}, "
     str += "v. #{volume}, " unless volume.empty?
     str += "n. #{publication_number}, " unless publication_number.empty?
-    str += "p. #{initial_final_page} " unless initial_final_page.empty?
+    str += "p. #{initial_final_page}, " unless initial_final_page.empty?
     str += "#{year_of_publication}"
     str += "."
 
@@ -101,6 +101,21 @@ class Publication < ActiveRecord::Base
     str += "#{year_of_publication}."
 
     str
+  end
+
+  def self.search(query)
+    if query.present?
+      where(['title LIKE :query OR
+              year_of_publication LIKE :query OR
+              description LIKE :query OR
+              local LIKE :query', query: "%#{query}%"])
+    else
+      all
+    end
+  end
+
+  def self.most_recent
+    order(created_at: :desc)
   end
 
   private
