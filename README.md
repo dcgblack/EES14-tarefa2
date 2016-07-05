@@ -14,7 +14,7 @@ O [Ansible](http://docs.ansible.com/index.html), por sua vez, é um provisionado
 
 Neste trabalho, o Vagrant é usado para iniciar e finalizar a VM. O Ansible é ligado ao Vagrant para configurar e deixar a VM pronta para execução da aplicação.
 
-__OBS__: Os passos descritos neste README presumem o uso de uma distribuição Linux, como Ubuntu, Debian, CentOS, Fedora. Se for usado Windows ou outro sistema, pode haver diferença em comandos e configurações. Aconselha-se a leitura dos links fornecidos no decorrer desta página, buscando pelo sistema que está sendo usado.
+__OBS__: Os passos descritos neste README presumem o uso de uma distribuição Linux, como Ubuntu, Debian, CentOS, Fedora. Aconselha-se a leitura dos links fornecidos no decorrer desta página, buscando pelo sistema operacional que está sendo usado.
 
 
 ## Organização do repositório
@@ -62,8 +62,3 @@ OBS: Os comandos sempre devem ser executados na mesma pasta onde se encontra o V
 Se você observar o Vagrantfile, poderá ver que ele faz o mapeamento de duas portas da VM para o host: porta 22, para acesso SSH, e porta 3000, da aplicação web. Assim, a porta 42022, no host, dá acesso SSH à VM. Já a porta 43000, no host, dá acesso à aplicação web.
 
 Logo, tendo executado o vagrant up com sucesso, basta colocar no navegador "http://localhost:43000" para ter acesso à aplicação.
-
-
-
-
-

@@ -1,8 +1,10 @@
 <h1>Publications</h1>
 <% Publication::CATEGORIES.each_pair do |label, name| %>
-  <br/><br/>
-  <h2><%= name %></h2>
-  <br/>
+  <% unless Publication.get_publications_by_category(name).empty? %>
+    <br/><br/>
+    <h2><%= name %></h2>
+    <br/>
+  <% end %>  
   <% Publication.get_years.each do |year| %>
     <% publications = Publication.get_publications_by_category_and_year(name, year) %>
     <% unless publications.empty? %>

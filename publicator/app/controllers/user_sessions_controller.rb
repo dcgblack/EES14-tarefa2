@@ -9,8 +9,8 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(session,
                                     params[:user_session])
-    if @user_session.authenticate!      
-      redirect_to root_path, notice: 'Login efetuado com sucesso'
+    if @user_session.authenticate!
+      redirect_to root_path, notice: 'Login successfully'
     else
       render :new
     end
@@ -18,6 +18,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     user_session.destroy
-    redirect_to root_path, notice: 'Deslogado com sucesso'
+    redirect_to root_path, notice: 'Logout successfully'
   end
 end

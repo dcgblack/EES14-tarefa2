@@ -13,14 +13,14 @@ class ApplicationController < ActionController::Base
   def require_authentication
     unless user_signed_in?
       redirect_to new_user_sessions_path,
-        alert: "Precisa estar logado"
+        alert: "Login is required"
     end
   end
 
   def require_no_authentication
     if user_signed_in?
       redirect_to root_path,
-        notice: "Já logado"
+        notice: "Already logged"
     end
   end
 end
