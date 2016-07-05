@@ -59,6 +59,80 @@ params <<  { :publication =>
   }
 }
 
+params <<  { :publication =>
+    {
+    :title =>'Nova',
+    :subtitle =>'Era',
+    :edition =>'3º',
+    :local =>'Viamão',
+    :publishing_company =>'Unibus',
+    :year_of_publication =>'2079',
+    :description =>'Uma breve historia',
+    :category =>'Monografias e livros',
+    :volume =>'5',
+    :publication_number =>'0',
+    :initial_final_page =>'1-100',
+    :authors_attributes => [{
+        :name => 'Rogerio',
+        :surname => 'Santos',
+        :curriculum_lattes => 'http://www.google.com',
+        :institution => 'institution',
+      }, {
+        :name => 'Maria',
+        :surname => 'Carmo',
+        :curriculum_lattes => 'http://www.google.com',
+        :institution => 'ABC' 
+        }, {
+        :name => 'Silvio',
+        :surname => 'Santos',
+        :curriculum_lattes => 'http://www.google.com',
+        :institution => 'SBT' }]
+  }
+}
+
+params <<  { :publication =>
+    {
+    :title =>'Um titulo',
+    :subtitle =>'Um subtitulo',
+    :edition =>'3º',
+    :local =>'Rio de janeiro',
+    :publishing_company =>'AAAA',
+    :year_of_publication =>'1985',
+    :description =>'Uma breve historia',
+    :category =>'Dissertações e teses',
+    :volume =>'5',
+    :publication_number =>'0',
+    :initial_final_page =>'1-100',
+    :authors_attributes => [{
+        :name => 'Rogerio',
+        :surname => 'Santos',
+        :curriculum_lattes => 'http://www.google.com',
+        :institution => 'institution'
+      }]
+    }
+}
+
+params <<  { :publication =>
+    {
+    :title =>'Um RFC titulo',
+    :subtitle =>'Um subtitulo',
+    :edition =>'3º',
+    :local =>'Rio de janeiro',
+    :publishing_company =>'AAAA',
+    :year_of_publication =>'1985',
+    :description =>'Uma breve historia',
+    :category =>'RFCs',
+    :volume =>'5',
+    :publication_number =>'0',
+    :initial_final_page =>'1-100',
+    :authors_attributes => [{
+        :name => 'Rogerio',
+        :surname => 'Santos',
+        :curriculum_lattes => 'http://www.google.com',
+        :institution => 'institution'
+      }]
+    }
+}
 params.each do |param|
   current_user.publications.build(param[:publication]).save
 end
