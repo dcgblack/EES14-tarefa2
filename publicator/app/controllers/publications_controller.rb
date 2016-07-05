@@ -30,7 +30,7 @@ class PublicationsController < ApplicationController
     @publication = current_user.publications.build(publication_params)
 
     if @publication.save
-      redirect_to @publication
+      redirect_to @publication, notice: "Publication created"
     else
       render :new
    end
@@ -40,7 +40,7 @@ class PublicationsController < ApplicationController
     @publication = current_user.publications.find(params[:id])
 
     if @publication.update(publication_params)
-      redirect_to @publication, notice: "Atualizado com sucesso"
+      redirect_to @publication, notice: "Publication updated"
     else
       render :edit
     end
