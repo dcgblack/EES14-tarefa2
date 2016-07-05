@@ -2,8 +2,11 @@ class PublicationsController < ApplicationController
   before_action :require_authentication,
     only: [:new, :edit, :create, :update, :destroy]
 
-    def index
-    @publications = Publication.all
+  def index
+    @search_query = params[:q]
+
+    publications = Publication.search(@search_query)    
+    @publications = publications.most_recent
   end
 
   def show
@@ -27,7 +30,7 @@ class PublicationsController < ApplicationController
     @publication = current_user.publications.build(publication_params)
 
     if @publication.save
-      redirect_to @publication, notice: "Publicação criada com sucesso"
+      redirect_to @publication
     else
       render :new
    end

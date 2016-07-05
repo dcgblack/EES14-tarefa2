@@ -1,4 +1,5 @@
 User.delete_all
+Publication.delete_all
 
 params =  { :user =>
     {
@@ -11,7 +12,8 @@ params =  { :user =>
 
 current_user = User.create!(params[:user])
 
-params =  { :publication =>
+params = []
+params <<  { :publication =>
     {
     :category => 'Artigos',
     :title => 'Ciclo de vida dos Preas',
@@ -32,4 +34,31 @@ params =  { :publication =>
   }
 }
 
-current_user.publications.build(params[:publication]).save
+params <<  { :publication =>
+    {
+    :category => 'Artigos',
+    :title => 'Escola das',
+    :subtitle => 'Ruas',
+    :edition => '2º',
+    :local => 'Porto Alegre',
+    :publishing_company => 'Revista Temp',
+    :year_of_publication => '2001',
+    :initial_final_page => '90-122',
+    :volume => '7',
+    :publication_number => '9',
+    :authors_attributes => [{
+        :name => 'Luffy',
+        :surname => 'Monkey',
+        :curriculum_lattes => 'http://www.google.com',
+        :institution => 'Escola das Ruas do RS',
+      }, {
+        :name => 'Anderson',
+        :surname => 'Silva',
+        :curriculum_lattes => 'http://www.google.com',
+        :institution => 'UFC' }]
+  }
+}
+
+params.each do |param|
+  current_user.publications.build(param[:publication]).save
+end

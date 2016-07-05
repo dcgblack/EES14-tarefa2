@@ -12,8 +12,20 @@ class Publication < ActiveRecord::Base
                 "F" => "Normas"
               }
 
+  def self.get_category_key(value)
+    CATEGORIES.key(value)
+  end
+
+  def self.get_years_from_category(pubs)
+    pubs.map{|pub| pub.year_of_publication}.uniq
+  end
+
   def self.get_years
     select("year_of_publication").map{|pub| pub.year_of_publication}.uniq
+  end
+
+  def self.get_publications_by_category(category)
+    where("category = :cat", {cat: category})
   end
 
   def self.get_publications_by_category_and_year(category, year)
@@ -33,7 +45,7 @@ class Publication < ActiveRecord::Base
     str += "#{local}, "
     str += "v. #{volume}, " unless volume.empty?
     str += "n. #{publication_number}, " unless publication_number.empty?
-    str += "p. #{initial_final_page} " unless initial_final_page.empty?
+    str += "p. #{initial_final_page}, " unless initial_final_page.empty?
     str += "#{year_of_publication}"
     str += "."
 
@@ -101,6 +113,28 @@ class Publication < ActiveRecord::Base
     str += "#{year_of_publication}."
 
     str
+  end
+
+  def self.search(query)
+    if query.present?
+      joins(:authors).where(['title LIKE :query OR
+              year_of_publication LIKE :query OR
+              description LIKE :query OR
+              subtitle LIKE :query OR
+              edition LIKE :query OR
+              publishing_company LIKE :query OR
+              category LIKE :query OR
+              volume LIKE :query OR
+              authors.name LIKE :query OR
+              authors.surname LIKE :query OR
+              local LIKE :query', query: "%#{query}%"])
+    else
+      all
+    end
+  end
+
+  def self.most_recent
+    order(created_at: :desc)
   end
 
   private

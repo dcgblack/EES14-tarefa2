@@ -1,0 +1,15 @@
+<article class="publication">
+  <br/><br/>
+    <h2><%= publication.category %></h2>
+  <br/>
+
+  <div class="title">
+    <b><%= publication.year_of_publication %></b>
+    <br/>
+  </div>
+
+  <p>
+    <%= highlight(publication.__send__("#{Publication.get_category_key(publication.category)}_to_ref".to_sym), @search_query) %>
+  </p>
+</article>
+<br/>
