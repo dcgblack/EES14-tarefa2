@@ -11,7 +11,12 @@
     </div>
   <% end %>
 
- <div class="field">
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.select(:category, ["Artigos","Monografias e livros", 
+      "Dissertações e teses", "Meios eletrônicos", "RFCs", "Normas"]) %>  
+  </div>
+  <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
@@ -40,14 +45,6 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :other %><br>
-    <%= f.text_field :other %>
-  </div>
-  <div class="field">
-    <%= f.label :category %><br>
-    <%= f.text_field :category %>
-  </div>
-  <div class="field">
     <%= f.label :volume %><br>
     <%= f.text_field :volume %>
   </div>
@@ -58,10 +55,6 @@
   <div class="field">
     <%= f.label :initial_final_page %><br>
     <%= f.text_field :initial_final_page %>
-  </div>
-  <div class="field">
-    <%= f.label :section %><br>
-    <%= f.text_field :section %>
   </div>
 
   <h2>Authors</h2>
