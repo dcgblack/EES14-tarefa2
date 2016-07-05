@@ -1,25 +1,19 @@
 <h1>Publications</h1>
 <% Publication::CATEGORIES.each_pair do |label, name| %>
   <% unless Publication.get_publications_by_category(name).empty? %>
-    <br/><br/>
-    <h2><%= name %></h2>
-    <br/>
-  <% end %>  
+    <br/><h2><%= name %></h2><br/>
+  <% end %>
   <% Publication.get_years.each do |year| %>
     <% publications = Publication.get_publications_by_category_and_year(name, year) %>
     <% unless publications.empty? %>
       <div class="title">
-        <b><%= year %></b>
-        <br/>
+        <b><%= year %></b><br/>
       </div>
     <% end %>
     <% publications.each do |publication| %>
       <article class="publication">
-        <p>
-          <%= publication.__send__("#{label}_to_ref".to_sym) %>
-        </p>
+        <p><%= publication.__send__("#{label}_to_ref".to_sym) %></p>
       </article>
     <% end %>
-    <br/>
   <% end %>
 <% end %>

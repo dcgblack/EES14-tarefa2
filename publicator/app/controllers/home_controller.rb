@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @publication = Publication.take(3)
+    @publication = Publication.last(5)
   end
 end

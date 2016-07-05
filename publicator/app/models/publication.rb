@@ -121,8 +121,8 @@ class Publication < ActiveRecord::Base
     authors_str = ""
 
     if authors.size > 3
-      authors_str += "#{authors.first.surname.to_s.upcase}, " unless is_empty? author.surname
-      authors_str += "#{author.name}. "
+      authors_str += "#{authors.first.surname.to_s.upcase}, " unless is_empty? authors.first.surname
+      authors_str += "#{authors.first.name}. "
       authors_str += "et al. "
     else
       authors.each do |author|
