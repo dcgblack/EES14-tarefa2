@@ -121,17 +121,17 @@ class Publication < ActiveRecord::Base
 
   def self.search(query)
     if query.present?
-      joins(:authors).where(['title LIKE :query OR
-              year_of_publication LIKE :query OR
-              description LIKE :query OR
-              subtitle LIKE :query OR
-              edition LIKE :query OR
-              publishing_company LIKE :query OR
-              category LIKE :query OR
-              volume LIKE :query OR
-              authors.name LIKE :query OR
-              authors.surname LIKE :query OR
-              local LIKE :query', query: "%#{query}%"])
+      joins(:authors).where(['title ILIKE :query OR
+              year_of_publication ILIKE :query OR
+              description ILIKE :query OR
+              subtitle ILIKE :query OR
+              edition ILIKE :query OR
+              publishing_company ILIKE :query OR
+              category ILIKE :query OR
+              volume ILIKE :query OR
+              authors.name ILIKE :query OR
+              authors.surname ILIKE :query OR
+              local ILIKE :query', query: "%#{query}%"])
     else
       all
     end

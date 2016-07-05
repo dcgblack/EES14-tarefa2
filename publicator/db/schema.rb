@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160702212037) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "authors", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "publication_id"
@@ -24,8 +27,8 @@ ActiveRecord::Schema.define(version: 20160702212037) do
     t.string   "surname"
   end
 
-  add_index "authors", ["publication_id"], name: "index_authors_on_publication_id"
-  add_index "authors", ["user_id"], name: "index_authors_on_user_id"
+  add_index "authors", ["publication_id"], name: "index_authors_on_publication_id", using: :btree
+  add_index "authors", ["user_id"], name: "index_authors_on_user_id", using: :btree
 
   create_table "publications", force: :cascade do |t|
     t.string   "title"
@@ -46,7 +49,7 @@ ActiveRecord::Schema.define(version: 20160702212037) do
     t.integer  "user_id"
   end
 
-  add_index "publications", ["user_id"], name: "index_publications_on_user_id"
+  add_index "publications", ["user_id"], name: "index_publications_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -57,6 +60,9 @@ ActiveRecord::Schema.define(version: 20160702212037) do
     t.string   "password_digest"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "authors", "publications"
+  add_foreign_key "authors", "users"
+  add_foreign_key "publications", "users"
 end
